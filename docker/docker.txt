@@ -1,0 +1,27 @@
+05.03.2025 docker installisieren for ros2
+           docker auto open at linux start: sudo systemctl start docker
+
+
+05.03.2025 docker pull ros2:docker pull osrf/ros:humble-desktop
+
+	   every time if i want to use ros2, i need:
+	  	   xhost +local:docker   (for graphi)
+	  
+		   docker run -it \
+		   --network=host \
+		   --privileged \
+		   --env="DISPLAY=$DISPLAY" \
+		   --env="QT_X11_NO_MITSHM=1" \
+ 		   --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+		   --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
+		   --volume="$HOME/ros2_projects:/root/ros2_ws" \
+		   osrf/ros:humble-desktop bash
+	   
+	    man can use shell: start_ros2.sh
+
+	    after we get in the new docker terminal, run ros:
+		   ros2 node list
+		   ros2 topic list
+	
+
+
