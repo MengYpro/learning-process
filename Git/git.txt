@@ -46,7 +46,12 @@
 	存放位置最好设置个密码，以防未经授权的人打开文件看到
 	也可以设置个ssh-agent来缓存密钥，每次开机验证一次即可，不用每次都输入密码
 
-5. 下载，修改并上传新内容到GitHub
+5. clone，修改并上传新内容到GitHub
 	git add
 	git commit -m "添加内容介绍"
+	git push origin 分支名
+	这句必须是本人授权才行，需要输入账号密码
+	如果没经过授权，可以尝试fork+pull-request来请求参与
+
+6. 更新仓库（如果仓库内容被别的地方修改过）
 	git push origin 分支名
