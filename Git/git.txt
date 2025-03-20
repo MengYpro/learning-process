@@ -20,8 +20,8 @@
 	# 推送到GitHub
 	git push -u origin master
 	origin是作为https的昵称，每个仓库位置只对应一个origin，以后每次用origin简化推送utl。
-	master是主分支，有些git版本是main，注意查看。
-	以后每次修改完要推送的时候用这句
+	master是主分支，有些git版本的主分支是main，注意查看。
+	以后每次修改完要推送的时候用 git push origin master （或者其他分支）
 
 	如果要修改origin的地址：
 	git remote set-url origin git@github.com:GitHub用户名/GitHub仓库名.git
@@ -45,3 +45,8 @@
 	~/.ssh/id_ed25519（密钥）
 	存放位置最好设置个密码，以防未经授权的人打开文件看到
 	也可以设置个ssh-agent来缓存密钥，每次开机验证一次即可，不用每次都输入密码
+
+5. 下载，修改并上传新内容到GitHub
+	git add
+	git commit -m "添加内容介绍"
+	git push origin 分支名
