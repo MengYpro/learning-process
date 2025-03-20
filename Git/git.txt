@@ -1,0 +1,47 @@
+1. 想知道系统中有几个仓库和地址
+	find ~ -name ".git" -type d -exec dirname {} \;
+	不要漏后面的“\;”
+
+2. 删除仓库
+	（1）只删除仓库，保留文件：rm -rf /path/to/repository/.git
+	（2）删除仓库和文件：rm -rf /path/to/repository
+
+3. 新建仓库
+	cd到仓库位置
+	git init将该文件夹设置成仓库
+
+3. 新仓库推送至GitHub
+	在GitHub上新建仓库
+	
+	# 添加GitHub作为远程仓库
+	git remote add origin https://github.com/你的用户名/你的仓库名.git
+	第一次链接的时候用一次就可以了，clone下来的也不用remote add
+
+	# 推送到GitHub
+	git push -u origin master
+	origin是作为https的昵称，每个仓库位置只对应一个origin，以后每次用origin简化推送utl。
+	master是主分支，有些git版本是main，注意查看。
+	以后每次修改完要推送的时候用这句
+
+	如果要修改origin的地址：
+	git remote set-url origin git@github.com:GitHub用户名/GitHub仓库名.git
+
+	确认远程仓库：
+	git remote -v
+	会显示链接的远程仓库，如果没有，则没有回应。
+
+4. 本地与GitHub账号之间的身份认证
+	两种方式：SSH和PAT，
+	常用SSH，设置好后不需要每次都输入凭证。PAT更简单，但需要定期更新令牌。
+
+	生成SSH密码：ssh-keygen -t ed25519 -C "您的邮箱@example.com"
+	将公钥添加到GitHub账户：
+	复制公钥(通常在~/.ssh/id_ed25519.pub)
+	在GitHub上，访问Settings → SSH and GPG keys → New SSH key
+	粘贴公钥并保存
+
+	公钥密钥都保存在Ubuntu里，通常在
+	~/.ssh/id_ed25519.pub（公钥）
+	~/.ssh/id_ed25519（密钥）
+	存放位置最好设置个密码，以防未经授权的人打开文件看到
+	也可以设置个ssh-agent来缓存密钥，每次开机验证一次即可，不用每次都输入密码
