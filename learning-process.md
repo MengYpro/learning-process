@@ -23,6 +23,7 @@ This repository documents my daily learning progress in programming, robotics, a
 ##Progress Summary
 
 [  ] Linux Fundamentals
+[ x ] tmux commands
 [  ] Git commands
 [  ] docker Fundamentals
 [  ] vim commands
@@ -41,7 +42,26 @@ Git:
 Linux:
 - eog for pictures, evince for pdf
 
+#23.03.2025
 
+tumx:
+- install tumx
+- learn all tumx fundamentals and commit tumx.txt in ./others/
+- practice it in Linux
+
+docker:
+- learn docker commands
+- clear old images and containers 
+- docker-ros2-wayland.sh
+- docker-ros2-X11.sh
+
+./bashrc in ./Linux/environment/:
+- learn .bashrc and commit bashrc.txt
+- learn /etc/bash.bashrc and ~/.bashrc
+
+vim:
+- creat dicrectory ./Linux/vim/
+- learn vim commands and practice it in linux
 
 
 
