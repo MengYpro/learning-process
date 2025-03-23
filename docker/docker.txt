@@ -1,27 +1,115 @@
-05.03.2025 docker installisieren for ros2
-           docker auto open at linux start: sudo systemctl start docker
+1. docker 安装 
+	# 更新包索引
+	sudo apt update
+
+	# 直接安装Docker
+	sudo apt install docker.io
+
+	# 启动Docker并设置开机自启
+	sudo systemctl start docker
+	sudo systemctl enable docker
+
+	# 验证安装
+	sudo docker run hello-world
 
 
-05.03.2025 docker pull ros2:  docker pull osrf/ros:humble-desktop
+           docker 开机启动： sudo systemctl start docker
 
-	   every time if i want to use ros2, i need:
-	  	   xhost +local:docker   (for graphi)
-	  
-		   docker run -it \
-		   --network=host \
-		   --privileged \
-		   --env="DISPLAY=$DISPLAY" \
-		   --env="QT_X11_NO_MITSHM=1" \
- 		   --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-		   --volume="$HOME/.Xauthority:/root/.Xauthority:rw" \
-		   --volume="$HOME/ros2_projects:/root/ros2_ws" \
-		   osrf/ros:humble-desktop bash
-	   
-	    man can use shell: start_ros2.sh
 
-	    after we get in the new docker terminal, run ros:
-		   ros2 node list
-		   ros2 topic list
+2. docker 拉取 ros2镜像：docker pull osrf/ros:humble-desktop
+
+	   每次开启ros2：（对于个人环境简单版本：只用于旧版Ubuntu的x11，
+			不适用于Ubuntu22版本及以后）
+
+	  	#!/bin/bash
+
+		xhost +local:docker
+
+		docker run -it \
+		 --name ros2_humble \
+ 		 --network host \
+ 		 -e DISPLAY=$DISPLAY \
+ 		 -v /tmp/.X11-unix:/tmp/.X11-unix \
+ 		 -v $(pwd)/ros_ws:/home/ros_ws \
+  		-v $HOME/.Xauthority:/root/.Xauthority \
+ 		 osrf/ros:humble-desktop \
+ 		 bash -c "source /opt/ros/humble/setup.bash && bash"
+
+		 xhost -local:docker
+
+
+3. 查找系统中有多少已存在的镜像：docker images 或者 docker image ls
+
+    查找系统中有多少正在运行的容器： docker ps
+    查找系统中有多少容器（包括已经停止的）： docker ps -a
+
+    不想知道具体信息，只需要知道数量：
+    docker images -q | wc -l    # 统计镜像数量
+    docker ps -q | wc -l        # 统计运行中的容器数量
+    docker ps -aq | wc -l       # 统计所有容器数量
+
+4. 删除单个容器：docker rm 容器ID或名称
+    删除所有已经停止的容器：docker container prune
+    
+    删除镜像：docker rmi 镜像ID或名称:标签（ID或者REPOSITORY:TAG ）
+  
+    必须先删除所有容器才能删除镜像，要不然会报错
+
+5. docker-desktop是图形化界面，用于win和macOS的
+
+6. Docker Compose是用于定义和运行多容器docker应用程序，它使用 YAML 文件来配置应用
+程序的服务，然后通过一个命令就可以创建并启动所有服务
+
+7. docker run运行之后，只要docker不退出，这句命令不停止，所以一直停在这句命令里
+
+8. Wayland（Ubuntu22及以后）：
+
+#!/bin/bash
+
+# 检查是否在Wayland会话中
+if [ "$XDG_SESSION_TYPE" != "wayland" ]; then
+    echo "警告: 当前不是Wayland会话，本脚本针对Wayland环境优化"
+    exit 1
+fi
+
+# 确保XDG_RUNTIME_DIR存在且有效
+if [ -z "$XDG_RUNTIME_DIR" ] || [ ! -d "$XDG_RUNTIME_DIR" ]; then
+    echo "错误: XDG_RUNTIME_DIR未定义或不存在"
+    exit 1
+fi
+
+# 确保WAYLAND_DISPLAY存在
+if [ -z "$WAYLAND_DISPLAY" ]; then
+    echo "警告: WAYLAND_DISPLAY未定义，尝试使用默认值wayland-0"
+    export WAYLAND_DISPLAY=wayland-0
+fi
+
+# 检查wayland socket是否存在
+if [ ! -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ]; then
+    echo "错误: Wayland socket不存在: $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY"
+    exit 1
+fi
+
+echo "启动支持Wayland的ROS 2 Humble容器..."
+
+# 启动容器
+docker run -it \
+    --name ros2_humble \
+    --rm \
+    --network host \
+    --security-opt=no-new-privileges \
+    -e DISPLAY=$DISPLAY \
+    -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -v $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY \
+    -v $XDG_RUNTIME_DIR/pulse:$XDG_RUNTIME_DIR/pulse \
+    -v $HOME/.config/pulse/cookie:/root/.config/pulse/cookie \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v $(pwd)/ros_ws:/home/ros_ws \
+    osrf/ros:humble-desktop \
+    bash -c "source /opt/ros/humble/setup.bash && bash"
+
+echo "ROS 2 Humble容器已退出"
 	
 
 

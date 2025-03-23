@@ -9,3 +9,36 @@ upgrade是将所有update列出来的内容更新
 每次安装新功能或者软件的时候，只需要update，安装新功能的时候会根据update列出来
 的内容来安装对应的版本，并同时更新update出来的新版依赖包。此时不需要upgrade是因为，
 安装新软件的时候会自动更新update中关于本软件的依赖包，且不需要更新upgrade中其他内容
+
+4. Wayland 是一个显示服务器协议，它是为了替代老旧的 X11/X Window System 而设计的。
+Wayland 在现代 Linux 桌面环境中越来越受欢迎，它与图形显示相关，负责协调应用程序和显示
+硬件之间的通信。
+
+Wayland 与 X11 的主要区别：
+
+	1. **架构**：Wayland 采用更简洁的设计，移除了 X11 中的许多历史遗留代码和复杂性
+	2. **安全性**：Wayland 提供更好的安全模型，应用程序默认情况下不能监听其他应用程序的输入
+	或截取其他窗口的内容
+	3. **性能**：Wayland 通常提供更好的性能和更低的延迟，特别是在现代图形硬件上
+
+	4. **合成器**：在 Wayland 中，窗口管理器和合成器是同一个组件，而 X11 中它们是分开的
+
+对于 Docker 和 ROS 2 使用，Wayland 带来的挑战：
+
+- Docker 容器内运行的图形应用程序在 Wayland 环境下可能需要不同的配置，因为传统的 X11 
+转发方法不适用
+- 许多 ROS 工具最初是为 X11 设计的，在 Wayland 下可能需要额外的兼容层
+
+如果你的 Ubuntu 系统使用 Wayland（Ubuntu 22.04+ 默认使用 Wayland），你可能需要：
+
+	1. 使用 XWayland（Wayland 的 X11 兼容层）
+	2. 使用特定的 Wayland 转发解决方案，如 Weston
+	3. 或者在登录时切换到 X11 会话（Ubuntu 登录屏幕上有选项）
+
+检查你是否使用 Wayland，可以在终端运行：
+```bash
+echo $XDG_SESSION_TYPE
+```
+
+如果输出是 "wayland"，你就是使用 Wayland；如果是 "x11"，则使用的是传统的 
+X Window System。（Ubuntu 22.04+ 默认使用 Wayland）
