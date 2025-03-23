@@ -1,0 +1,47 @@
+1. .bashrc文件是重要的配置文件，/etc/bash.bashrc是整个系统的配置文件，
+会第一步先读取，~/.bashrc是用户个人的配置文件，会第二步读取，如果
+用户需要添加其他的.bashrc文件，可以source，系统会第三步读取，另外添加
+的这个bashrc不会影响新终端，需要每次自己source，随终端的中止而消失作用
+
+用户的 ~/.bashrc 中的设置会覆盖 /etc/bash.bashrc 中的同名设置
+这允许系统设置默认值，同时用户可以根据个人需求覆盖它们
+
+普通用户不能修改/etc/bash.bashrc文件，它需要管理员权限（sudo）才能编辑
+这保护了系统级设置不被普通用户更改, 可以修改用户自己的~/.bashrc
+
+2. 基本用途：
+
+环境变量设置：定义和修改系统路径、用户特定变量
+别名创建：为常用命令创建简短版本
+自定义函数：创建可复用的命令序列
+Shell行为配置：修改命令历史、补全行为等
+
+3. 对于ros，一般不推荐直接将环境变量写进bashrc的原因是，可能一个系统内
+存在不同的ros版本或者不同的工作空间。但是其实bashrc能完美解决，比如用
+别名alias或者用不同名字的函数调用对应的ros。
+
+# ROS版本别名
+alias ros1='source /opt/ros/noetic/setup.bash'
+alias ros2='source /opt/ros/humble/setup.bash'
+
+# ROS环境函数
+ros1( ) {
+    source /opt/ros/noetic/setup.bash
+    if [ -d ~/ros1_ws ]; then
+        source ~/ros1_ws/devel/setup.bash
+    fi
+    echo "ROS1 Noetic环境已加载"
+}
+
+ros2( ) {
+    source /opt/ros/humble/setup.bash
+    if [ -d ~/ros2_ws ]; then
+        source ~/ros2_ws/install/setup.bash
+    fi
+    echo "ROS2 Humble环境已加载"
+}
+
+4. 每给系统添加新的功能或者软件的时候都可以按需给~/.bashrc添加对应的内容
+但是修改之前记得备份，以防出错
+修改后记得source，但是开新终端会直接自动source，只是对之前已经开过的终端
+不起作用
