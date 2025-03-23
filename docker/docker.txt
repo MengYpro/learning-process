@@ -2,7 +2,7 @@
            docker auto open at linux start: sudo systemctl start docker
 
 
-05.03.2025 docker pull ros2:docker pull osrf/ros:humble-desktop
+05.03.2025 docker pull ros2:  docker pull osrf/ros:humble-desktop
 
 	   every time if i want to use ros2, i need:
 	  	   xhost +local:docker   (for graphi)
