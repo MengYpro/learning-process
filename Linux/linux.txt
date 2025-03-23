@@ -1,0 +1,37 @@
+1. ls (使用通配符时，Linux默认不会显示隐藏文件, 加-la可以显示)
+	# 查看所有.txt文件
+	ls *.txt
+
+	# 查看所有.sh脚本文件
+	ls *.sh
+
+	# 查看所有以'rc'结尾的文件（如.bashrc, .vimrc等）
+	ls *rc
+
+	# 查看名称中包含"bash"的文件
+	ls -la | grep bash
+
+	# 只列出目录
+	ls -la | grep "^d"
+
+	# 只列出普通文件
+	ls -la | grep "^-"
+
+	# 只列出目录
+	ls -d */
+
+	# 按文件类型着色显示
+	ls --color=auto
+
+2. find
+	# 查找当前目录下所有.md文件
+	find . -name "*.md"
+
+	# 查找当前目录下所有目录
+	find . -type d
+
+	# 查找当前目录下所有普通文件
+	find . -type f
+
+	# 查找当前目录下所有隐藏文件（以.开头的文件）
+	find . -name ".*" -type f
