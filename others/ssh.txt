@@ -1,0 +1,34 @@
+SSH：远程连接
+
+SSH 原理上需要在客户端和服务器两端都安装：
+
+客户端（主机）：你需要安装 SSH 客户端软件，用于发起连接（大多数 Linux 发行版默认已安装）
+服务器端：需要安装 SSH 服务器软件，用于接受连接请求。
+但为了安全起见，SSH 服务器通常默认不安装，需要手动安装
+（当你租用云服务器时，服务器端通常已经预装并配置好了SSH服务器，你只需使用客户端进行连接）
+
+在 Ubuntu 环境下：
+
+安装 SSH 客户端（大多数 Linux 发行版默认已安装）：
+sudo apt install openssh-client
+
+安装 SSH 服务器：
+sudo apt install openssh-server
+
+
+安装后，服务器端通常会自动启动 SSH 服务。
+
+你可以通过以下命令检查 SSH 服务的状态：
+sudo systemctl status ssh
+
+如果你要从主机连接到服务器，只需使用类似以下的命令：
+ssh 用户名@服务器IP地址
+
+检查 SSH 客户端是否已安装：which ssh
+如果已安装，会显示类似 /usr/bin/ssh 的路径。
+或者: dpkg -l | grep openssh-client
+如果已安装，你会看到包含 openssh-client 的一行信息。
+
+检查 SSH 服务器是否安装: dpkg -l | grep openssh-server
+
+检查 SSH 服务是否在运行: sudo systemctl status ssh

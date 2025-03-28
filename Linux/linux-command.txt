@@ -42,3 +42,14 @@
 
 4. mv改名
 	mv 原名 新名
+
+5. which 命令可以用来查找任何在你的 PATH 环境变量中的可执行命令或软件的位置
+	which ssh
+
+6. sudo ufw 防火墙配置工具
+	sudo ufw enable - 启用防火墙
+	sudo ufw disable - 禁用防火墙
+	sudo ufw status - 查看防火墙当前状态
+	sudo ufw allow <端口/服务> - 允许特定端口或服务的流量
+	sudo ufw deny <端口/服务> - 阻止特定端口或服务的流量
+	sudo ufw reset - 重置防火墙到默认设置

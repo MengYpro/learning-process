@@ -1,0 +1,57 @@
+1. iptables是Linux内核中的防火墙系统
+
+	一些常用的 sudo ufw 命令包括：
+
+	sudo ufw enable - 启用防火墙
+	sudo ufw disable - 禁用防火墙
+	sudo ufw status - 查看防火墙当前状态
+	sudo ufw allow <端口/服务> - 允许特定端口或服务的流量
+	sudo ufw deny <端口/服务> - 阻止特定端口或服务的流量
+	sudo ufw reset - 重置防火墙到默认设置
+
+2. 端口port和服务service
+	
+	端口范围分类：
+	0-1023：常见系统服务的"知名端口"（需要管理员权限）
+	1024-49151：注册端口（应用程序可以注册使用）
+	49152-65535：动态/私有端口（临时使用）
+
+	常见端口例子：
+	80: HTTP网页浏览
+	443: HTTPS安全网页浏览
+	22: SSH远程连接
+	53: DNS域名解析
+	21: FTP文件传输
+
+
+	服务：一个持续运行的程序，提供特定功能，通常监听在指定端口上
+	使用systemctl命令：sudo systemctl start/stop/restart/status 服务名
+	查看所有服务：systemctl list-units --type=service
+
+	端口和服务的关系：
+	一个服务通常会监听一个或多个特定的端口
+	当你使用防火墙规则sudo ufw allow 22时，你允许的是SSH服务使用的端口
+	你也可以直接允许服务：sudo ufw allow ssh（这更易读，效果相同）
+
+3. 局域网：
+	查看目标计算机ip地址： ifconfig
+	查看域名：ssh user@hostname.local
+
+家庭或办公室公网：
+	访问 whatismyip.com 等网站来查看您的公网IP
+	家庭网络通常使用动态IP，可能会定期变化
+	考虑使用动态DNS（域名系统）服务获取一个固定域名
+vps（网上租的虚拟专用服务器）：
+	会给地址
+
+4. ping测试IP连通性，验证网络层是否工作, 与dns不同
+
+	在网络问题诊断流程中，通常:
+	- 先用ping检测网络连通性
+	- 如果ping成功，再用dig检测DNS解析
+	- 如果dig成功，再测试应用层(如HTTP)连接
+
+测试网络连通性 - 验证您的计算机是否可以到达目标主机
+测量网络延迟 - 显示数据包往返所需的时间(RTT, Round-Trip Time)
+检测数据包丢失 - 显示发送和接收的数据包数量
+验证主机是否在线 - 快速确认目标系统是否运行并响应
