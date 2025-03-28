@@ -63,8 +63,17 @@ vim:
 - creat dicrectory ./Linux/vim/
 - learn vim commands and practice it in linux
 
+#28.03.2025
 
+ssh, dns, dig in others/:
+- learn to use the DNS tool 'dig' to diagnose network problems
+- learn Network Layer Models
+- learn to connect to cloud servers using SSH
+- know "Team Viewr"
+- learn 'ping' to diagnose network problems
 
+ROS2:
+- learn the principles of ROS2
 
 
 
