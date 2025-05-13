@@ -17,7 +17,7 @@
            docker 开机启动： sudo systemctl start docker
 
 
-2. docker 拉取 ros2镜像：docker pull osrf/ros:humble-desktop
+2. docker 拉取 ros2镜像：docker pull osrf/ros:humble-desktop 与当前位置无关，位置是固定的
 
 	   每次开启ros2：（对于个人环境简单版本：只用于旧版Ubuntu的x11，
 			不适用于Ubuntu22版本及以后）
