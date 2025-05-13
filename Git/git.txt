@@ -10,7 +10,14 @@
 	cd到仓库位置
 	git init将该文件夹设置成仓库
 
-3. 新仓库推送至GitHub
+4. account
+	git config --globel user.name "user.name"
+	git config --globel user.email "user.email"
+	which account:
+	git config --globel user.name
+	git config --globel user.email
+	
+5. 新仓库推送至GitHub
 	在GitHub上新建仓库
 	
 	# 添加GitHub作为远程仓库
@@ -30,7 +37,7 @@
 	git remote -v
 	会显示链接的远程仓库，如果没有，则没有回应。
 
-4. 本地与GitHub账号之间的身份认证
+6. 本地与GitHub账号之间的身份认证
 	两种方式：SSH和PAT，
 	常用SSH，设置好后不需要每次都输入凭证。PAT更简单，但需要定期更新令牌。
 
@@ -46,17 +53,17 @@
 	存放位置最好设置个密码，以防未经授权的人打开文件看到
 	也可以设置个ssh-agent来缓存密钥，每次开机验证一次即可，不用每次都输入密码
 
-5. clone，修改并上传新内容到GitHub
+7. clone，修改并上传新内容到GitHub
 	git add
 	git commit -m "添加内容介绍"
 	git push origin 分支名
 	这句必须是本人授权才行，需要输入账号密码
 	如果没经过授权，可以尝试fork+pull-request来请求参与
 
-6. 更新仓库（如果仓库内容被别的地方修改过）
+8. 更新仓库（如果仓库内容被别的地方修改过）
 	git push origin 分支名
 
-7. 忽略某些特定的文件或者文件夹，添加空目录
+9. 忽略某些特定的文件或者文件夹，添加空目录
 	.gitignore 文件，文件中可以使用通配符
 
 	举例.gitignore 文件写法：

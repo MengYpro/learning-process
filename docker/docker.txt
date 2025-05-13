@@ -7,7 +7,8 @@
 
 	# 启动Docker并设置开机自启
 	sudo systemctl start docker
-	sudo systemctl enable docker
+	sudo systemctl enable (--now) docker
+	--now: means, enable and then start it now, dont need the start command 
 
 	# 验证安装
 	sudo docker run hello-world
