@@ -1,0 +1,6 @@
+1. workspace工作空间
+	包括四个部分：build, install, log, src
+	src存放主要内容，build存放的是运行过程中产生的内容，如果最后运行成功，结果会存储在install里。
+	整个过程中的日志会保存在log中。
+
+	dev_ws名字是自己定义的。可以平行放置不同的工作空间文件夹
