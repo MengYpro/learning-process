@@ -105,3 +105,10 @@
 不管理，但是这个空目录只存在与本地，被clone走了以后，别人就没这个目录了就会报错，所以需要
 git确实管理着这样一个空目录，在空目录里添加一个空文件.gitkeep，就是为了git能成功管理这个
 空目录使其非空，然后让git忽略掉“空目录”中存在的其他不需要被上传的文件
+
+10. 新增设备想要连接github仓库
+	git remote -v
+	ssh-keygen -t ed25519 -C "您的GitHub邮箱"
+	cat ~/.ssh/id_ed25519.pub
+	ssh -T git@github.com
+	git remote set-url origin git@github.com:您的用户名/learning-process.git	git push origin master
