@@ -1,0 +1,18 @@
+1. 磁盘管理
+2. arduino下载
+3. htop
+4. git
+5. build-essential
+6. python3-dev python3-pip python-venv
+7. curl,wget
+8. neofetch
+9. cmake clang clang-tools
+10. 压缩软件 tar gzip zip unzip
+11. sudo apt install ubuntu-restricted-extras
+12. sudo apt install gnome-tweaks
+13. fonts-noto-cjk fonts-noto-color-emoji
+14. vscode
+15. sudo apt install libreoffice
+16. steam
+17. Proton/Wine: sudo apt install wine winetricks
+

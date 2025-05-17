@@ -1,0 +1,45 @@
+1. 装系统时黑屏，有可能是显卡兼容或者启动参数问题，把显示模式改称基础即可
+	用安全图形模式启动：
+
+	重启并再次进入Ubuntu启动菜单
+	在"Try or Install Ubuntu"选项上按下"e"键进入编辑模式
+	找到包含"quiet splash"的行，将其修改为"quiet splash nomodeset"
+	按F10保存并尝试启动
+	（可能需要在用优盘安装时和拔掉优盘重启时都来一遍）
+
+	之后顺利进入已经完全装好的ubuntu中重新安装显卡驱动。
+	sudo apt update && sudo apt upgrade -y
+	安装NVIDIA驱动：
+	sudo ubuntu-drivers autoinstall
+
+2. GRUB是开机时用来选择双系统的菜单
+	如果开机不显示GRUB而是直接进入某一个系统，可能是GRUB设置不正确
+
+	打开终端并编辑GRUB配置：
+	sudo nano /etc/default/grub
+	修改以下设置：
+
+	将 GRUB_TIMEOUT_STYLE=hidden 改为 GRUB_TIMEOUT_STYLE=menu（如果存在）
+	将 GRUB_TIMEOUT=0 改为 GRUB_TIMEOUT=10（设置10秒等待时间）
+	确保（添加） GRUB_DISABLE_OS_PROBER=false（允许检测其他操作系统）
+
+
+	保存并退出：按 Ctrl+O，然后按 Enter 保存，再按 Ctrl+X 退出
+	更新GRUB配置：
+	sudo update-grub
+
+	重启系统：
+	bashsudo reboot
+
+
+3.ubuntu上装启动盘，用WoeUSB软件
+	win和ubuntu不同，底层有很大区别，所以win的启动盘会花很多时间，10-20分钟
+
+
+4.efi是操作系统启动引导区域，每个系统都会装一个，如果先安装好了一个系统，另一个系统安装的时候很可能检测到已经建好的efi区域，并将自己的引导放进去。无所谓的，还方便管理，损坏风险小。即使发生损坏，补救措施也很简单。其他内容并不影响efi区域的功能。
+
+4. 双系统会互相挂载另一个系统的磁盘。ubuntu会直接显示在左侧Dock栏。可以找到Disk应用，选择对应的磁盘然后禁用。第一个十几M的是不能动的，是win的保留文件（与efi有关），也不会显示在Dock里，所以不用管，可以留一个共享文件夹，其他的（包括C盘）全部禁止掉。
+
+	Edit Mount Options
+	Mount at system startup叉掉
+	Show in user interface叉掉
