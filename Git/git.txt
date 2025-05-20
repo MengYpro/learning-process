@@ -112,3 +112,6 @@ git确实管理着这样一个空目录，在空目录里添加一个空文件.g
 	cat ~/.ssh/id_ed25519.pub
 	ssh -T git@github.com
 	git remote set-url origin git@github.com:您的用户名/learning-process.git	git push origin master
+
+11. 删除昵称比如origin2
+	git remote remove origin2
