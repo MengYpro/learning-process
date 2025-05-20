@@ -15,4 +15,4 @@
 15. sudo apt install libreoffice
 16. steam
 17. Proton/Wine: sudo apt install wine winetricks
-
+18. conky

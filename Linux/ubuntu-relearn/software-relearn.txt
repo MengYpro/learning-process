@@ -47,6 +47,8 @@
 
 	Proton/Wine: sudo apt install wine winetricks
 
+16. conky 待办事项，需要用命令行和shell来配合
+
 
 
 
