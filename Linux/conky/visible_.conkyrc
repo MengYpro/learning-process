@@ -1,0 +1,30 @@
+conky.config = {
+    alignment = 'top_right',
+    background = true,
+    border_width = 1,
+    default_color = 'white',
+    double_buffer = true,
+    draw_borders = false,
+    font = 'DejaVu Sans Mono:size=12',
+    gap_x = 50,
+    gap_y = 60,
+    minimum_height = 5,
+    minimum_width = 300,
+    no_buffers = true,
+    own_window = true,
+    own_window_class = 'Conky',
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 50,
+    update_interval = 1.0,
+    use_xft = true
+}
+
+conky.text = [[
+${color orange}待办事项 ${hr 2}$color
+${color white}${exec cat ~/todo/tasks.txt | sed 's/●/${color yellow}●${color white}/g' | sed 's/✓/${color green}✓${color white}/g'}${color}
+
+${color cyan}${hr 2}$color
+${color gray}更新: ${exec date "+%Y-%m-%d %H:%M"}$color
+]]
